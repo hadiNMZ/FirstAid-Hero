@@ -98,6 +98,7 @@ public class Emergency {
         this.isCommon = isCommon;
     }
 
+    @Ignore
     public void setIsCommon(boolean isCommon) {
         this.isCommon = isCommon;
     }
