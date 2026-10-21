@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">FirstAid Hero</string>
+    <string name="main_title">المسعف الأول - FirstAid Hero</string>
+    <string name="search_hint">ابحث عن حالة طارئة أو عرض (مثل: حروق، اختناق)...</string>
+    <string name="filter_all">الكل</string>
+    <string name="filter_common">حالات شائعة</string>
+    <string name="filter_high">حالات حرجة</string>
+    <string name="empty_results">لا توجد نتائج مطابقة</string>
+    <string name="detail_title">تفاصيل الحالة</string>
+    <string name="symptoms_header">الأعراض</string>
+    <string name="steps_header">خطوات الإسعاف</string>
+    <string name="call_emergency">اتصل بالإسعاف (110)</string>
+    <string name="dialer_not_found">لا يوجد تطبيق اتصال على هذا الجهاز</string>
 </resources>
