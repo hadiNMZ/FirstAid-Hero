@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="fa_red">#D32F2F</color>
+    <color name="fa_red_dark">#B71C1C</color>
+    <color name="fa_green">#2E7D32</color>
+    <color name="fa_white">#FFFFFF</color>
+    <color name="fa_gray_bg">#F5F5F5</color>
+    <color name="fa_gray_border">#E0E0E0</color>
+    <color name="fa_text_primary">#212121</color>
+    <color name="fa_text_secondary">#616161</color>
+
 </resources>
