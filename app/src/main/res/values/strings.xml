@@ -11,4 +11,237 @@
     <string name="steps_header">خطوات الإسعاف</string>
     <string name="call_emergency">اتصل بالإسعاف (110)</string>
     <string name="dialer_not_found">لا يوجد تطبيق اتصال على هذا الجهاز</string>
+    <string name="app_title_nabd">نبض الإسعاف</string>
+    <string name="app_subtitle_nabd">بروتوكولات الطوارئ الطبية السريعة</string>
+    <string name="emergency_button">طوارئ 110</string>
+    <string name="emergency_number">110</string>
+    <string name="nav_guides">الأدلة</string>
+    <string name="nav_kit">الحقيبة</string>
+    <string name="nav_cases">الحالات المسجلة</string>
+    <string name="nav_contacts">جهات الاتصال</string>
+    <string name="nav_settings">الإعدادات</string>
+    <string name="coming_soon">قريباً</string>
+    <string name="offline_banner">البروتوكولات متاحة بدون إنترنت</string>
+    <string name="ready_badge">جاهز للعمل</string>
+    <string name="guides_header">بروتوكولات الطوارئ</string>
+    <string name="view_steps">عرض خطوات الإسعاف</string>
+    <string name="back">رجوع</string>
+    <string name="direct_call_label">اتصال مباشر بالإسعاف</string>
+    <string name="ambulance">سيارة الإسعاف</string>
+    <string name="call_110">اتصل 110</string>
+    <string name="symptoms_long">الأعراض السريرية للتعرف على الحالة</string>
+    <string name="steps_long">خطوات الإسعاف الأولي المتبعة</string>
+    <string name="contacts_title">جهات اتصال الطوارئ</string>
+    <string name="contacts_subtitle">أرقام الطوارئ الوطنية وجهات اتصالك الخاصة في مكان واحد</string>
+    <string name="national_lines">الخطوط الوطنية السريعة</string>
+    <string name="line_ambulance">الإسعاف</string>
+    <string name="line_health">الطوارئ الصحية</string>
+    <string name="line_civil">الدفاع المدني</string>
+    <string name="saved_contacts">أرقامك الشخصية والطبية المحفوظة</string>
+    <string name="no_contacts">لم تُضف أي جهة اتصال بعد</string>
+    <string name="offline_ready_title">جاهزية تامة بدون شبكة</string>
+    <string name="offline_ready_body">جميع الأرقام محفوظة على جهازك ويمكن الاتصال بها في أي وقت دون الحاجة للإنترنت.</string>
+    <string name="add_contact">إضافة جهة اتصال</string>
+    <string name="add_contact_title">إضافة جهة اتصال جديدة</string>
+    <string name="add_contact_info">تُحفظ جهات الاتصال على جهازك فقط وتظهر في قائمة الاتصال السريع.</string>
+    <string name="label_name">الاسم الكامل</string>
+    <string name="hint_name">مثال: د. عبد الرحمن</string>
+    <string name="label_phone">رقم الهاتف</string>
+    <string name="hint_phone">09XXXXXXXX</string>
+    <string name="label_relationship">صلة القرابة / الصفة</string>
+    <string name="hint_relationship">مثال: طبيب العائلة</string>
+    <string name="save_contact">حفظ جهة الاتصال</string>
+    <string name="cancel_back">إلغاء والعودة</string>
+    <string name="error_required">هذا الحقل مطلوب</string>
+    <string name="contact_saved">تم حفظ جهة الاتصال</string>
+    <string name="edit_contact_title">تعديل جهة الاتصال</string>
+    <string name="save_changes">حفظ التعديلات</string>
+    <string name="delete_contact">حذف جهة الاتصال</string>
+    <string name="delete_contact_confirm">هل تريد حذف %s من جهات الاتصال؟</string>
+    <string name="delete">حذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="contact_deleted">تم حذف جهة الاتصال</string>
+    <string name="call">اتصال</string>
+    <string name="send_message">إرسال رسالة</string>
+    <string name="edit">تعديل</string>
+    <string name="sms_not_found">لا يوجد تطبيق رسائل على هذا الجهاز</string>
+    <string name="rel_father">أب</string>
+    <string name="rel_mother">أم</string>
+    <string name="rel_sibling">أخ / أخت</string>
+    <string name="rel_spouse">زوج / زوجة</string>
+    <string name="rel_friend">صديق</string>
+    <string name="rel_doctor">طبيب</string>
+    <string name="cases_title">سجل الإسعافات</string>
+    <string name="cases_subtitle">توثيق الحالات والإجراءات الإسعافية المعالجة محلياً</string>
+    <string name="cases_search_hint">ابحث في السجلات المحفوظة…</string>
+    <string name="no_cases">لا توجد حالات مسجلة بعد</string>
+    <string name="cases_footer">البيانات محفوظة محلياً على جهازك</string>
+    <string name="log_incident">تسجيل حالة إسعافية جديدة</string>
+    <string name="log_intro_title">سجل الحالات الطارئة</string>
+    <string name="log_intro_body">سجل دقيق للتدخل الإسعافي لضمان استمرارية الرعاية</string>
+    <string name="label_datetime">تاريخ ووقت الحالة</string>
+    <string name="auto">تلقائي</string>
+    <string name="label_description">وصف الحالة أو الإصابة *</string>
+    <string name="hint_description">مثال: نزيف سطحي، كدمة في الكاحل…</string>
+    <string name="label_notes">ملاحظات الإجراءات الإسعافية *</string>
+    <string name="hint_notes">اكتب الخطوات التي قمت بها بالتفصيل (مثل: مدة الضغط، المواد المستخدمة، استجابة المصاب)…</string>
+    <string name="label_photo">إرفاق صورة الإصابة أو التقرير (اختياري)</string>
+    <string name="attach_photo">إرفاق صورة</string>
+    <string name="attach_photo_sub">اختر صورة من المعرض أو الملفات</string>
+    <string name="label_triage">درجة أولوية الفرز (Triage Level)</string>
+    <string name="triage_stable">مستقرة (أخضر)</string>
+    <string name="triage_urgent">عاجلة (أصفر)</string>
+    <string name="triage_critical">حرجة (أحمر)</string>
+    <string name="save_log">حفظ السجل</string>
+    <string name="case_saved">تم توثيق الحالة بنجاح!</string>
+    <string name="quick_bleeding">نزيف حاد</string>
+    <string name="quick_choking">اختناق</string>
+    <string name="quick_burn">حرق درجة ثانية</string>
+    <string name="quick_faint">إغماء وفقدان وعي</string>
+    <!-- Home / detail extras -->
+    <string name="voice_search">بحث صوتي</string>
+    <string name="voice_search_prompt">قل اسم الحالة أو العرض</string>
+    <string name="voice_not_available">البحث الصوتي غير متاح على هذا الجهاز</string>
+    <string name="filter_common_short">شائع</string>
+    <string name="sort_most_severe">الأشد خطورة</string>
+    <string name="sort_alpha">أ - ي</string>
+    <string name="protocol_session">جلسة البروتوكول</string>
+    <string name="timer_title">مؤقت الإسعاف</string>
+    <string name="timer_zero">00:00</string>
+    <string name="timer_hint">لقياس مدة الضغط أو دورات الإنعاش</string>
+    <string name="timer_start">بدء</string>
+    <string name="timer_pause">إيقاف</string>
+    <string name="timer_reset">إعادة الضبط</string>
+    <string name="add">إضافة</string>
+    <string name="line_ambulance_full">الإسعاف والطوارئ الطبية</string>
+
+    <!-- Settings -->
+    <string name="settings_title">إعدادات النظام والتخزين</string>
+    <string name="settings_subtitle">تفضيلات الاستخدام وإدارة البيانات المحفوظة على جهازك</string>
+    <string name="db_status_title">قاعدة البيانات الطبية</string>
+    <string name="db_status_sub">محفوظة بالكامل على الجهاز وتعمل دون إنترنت</string>
+    <string name="db_ready_pill" formatted="false">جاهزة 100%</string>
+    <string name="db_protocols">بروتوكول إسعافي</string>
+    <string name="db_critical">حالة حرجة موثقة</string>
+    <string name="pref_section_protocols">تفضيلات بروتوكولات الطوارئ</string>
+    <string name="pref_keep_screen_on">إبقاء الشاشة مضاءة أثناء الإسعاف</string>
+    <string name="pref_keep_screen_on_sub">تمنع إطفاء الشاشة تلقائياً أثناء متابعة خطوات البروتوكول</string>
+    <string name="pref_large_text">تكبير نص الخطوات</string>
+    <string name="pref_large_text_sub">خط أكبر لخطوات الإسعاف لقراءة أسهل في المواقف الصعبة</string>
+    <string name="pref_section_data">التقارير والبيانات</string>
+    <string name="pref_export_title">تصدير السجل الطبي الشامل</string>
+    <string name="pref_export_sub">مشاركة جميع الحالات الموثقة كنص يمكن إرساله للطبيب أو للإسعاف</string>
+    <string name="pref_export_button">مشاركة السجل</string>
+    <string name="pref_clear_button">حذف السجل</string>
+    <string name="pref_clear_confirm">سيتم حذف جميع الحالات المسجلة نهائياً. هل أنت متأكد؟</string>
+    <string name="pref_cleared">تم حذف جميع الحالات</string>
+    <string name="pref_nothing_to_export">لا توجد حالات لمشاركتها</string>
+    <string name="version_label">نبض الإسعاف v%s</string>
+
+
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_log">السجل</string>
+
+    <!-- Emergency categories -->
+    <string name="cat_bleeding">النزيف والجروح</string>
+    <string name="cat_burns">الحروق</string>
+    <string name="cat_breathing">التنفس والاختناق</string>
+    <string name="cat_heart">القلب والإنعاش</string>
+    <string name="cat_bones">الكسور والالتواءات</string>
+    <string name="cat_bites">اللدغات والتسمم</string>
+    <string name="cat_weather">الحرارة والبرد</string>
+    <string name="cat_general">إسعافات عامة</string>
+
+    <!-- Guides / detail -->
+    <string name="immediate_action">إجراء فوري</string>
+    <string name="critical_alert">تنبيه حرج • إجراء فوري</string>
+    <string name="minor_alert">إصابة بسيطة • رعاية منزلية</string>
+    <string name="safety_title">حاجز أمان المسعف</string>
+    <string name="safety_body">تأكد أولاً من أمان المكان لك وللمصاب، وارتدِ القفازات إن توفرت، ثم ابدأ الإسعاف بهدوء.</string>
+    <string name="step_label">الخطوة %s</string>
+    <string name="filter_count">%1$s (%2$d)</string>
+
+    <!-- Triage -->
+    <string name="triage_short_stable">مستقر</string>
+    <string name="triage_short_urgent">عاجل</string>
+    <string name="triage_short_critical">حرج</string>
+
+    <!-- Cases log -->
+    <string name="new_case_banner">تسجيل حالة إسعاف جديدة</string>
+    <string name="new_case_banner_sub">توثيق فوري للأعراض، الإجراءات، والوقت</string>
+    <string name="cases_section">سجل الوقائع والإجراءات الإسعافية</string>
+    <string name="sorted_newest">مرتبة من الأحدث</string>
+    <string name="stat_total_cases">إجمالي الحالات الموثقة</string>
+    <string name="stat_critical_cases">حالات حرجة</string>
+    <string name="procedural_notes">الملاحظات الإجرائية (Procedural Notes)</string>
+    <string name="medical_photo">توثيق طبي</string>
+    <string name="view_full_report">عرض التقرير الكامل</string>
+    <string name="share">مشاركة</string>
+    <string name="case_report_title">تقرير الحالة</string>
+    <string name="case_number">رقم الحالة: #%d</string>
+    <string name="edit_case_title">تعديل الحالة</string>
+    <string name="delete_case">حذف الحالة</string>
+    <string name="delete_case_confirm">هل تريد حذف هذه الحالة من السجل نهائياً؟</string>
+    <string name="case_deleted">تم حذف الحالة</string>
+    <string name="share_case_text">تقرير حالة إسعافية\n%1$s\nالتاريخ: %2$s\nدرجة الفرز: %3$s\n\nالإجراءات:\n%4$s</string>
+    <string name="share_via">مشاركة عبر</string>
+    <string name="time_just_now">الآن</string>
+    <string name="time_minutes">قبل %d د</string>
+    <string name="time_hours">قبل %d س</string>
+    <string name="time_days">قبل %d يوم</string>
+
+    <!-- Contacts -->
+    <string name="line_police">الشرطة</string>
+    <string name="line_fire">الإطفاء</string>
+    <string name="available_247">متاح على مدار الساعة</string>
+    <string name="private_contacts">جهات الاتصال الخاصة والطبية</string>
+    <string name="registered_count">%d مسجلة</string>
+    <string name="sos_message">رسالة SOS</string>
+    <string name="sos_text">رسالة طوارئ: أحتاج إلى مساعدة عاجلة. أرجو الاتصال بي فوراً.</string>
+    <string name="more_options">خيارات إضافية</string>
+
+    <!-- Kit -->
+    <string name="kit_title">جاهزية الحقيبة الطبية</string>
+    <string name="kit_summary">%1$d عنصر • %2$d نواقص • %3$d قريبة الانتهاء</string>
+    <string name="kit_ready_percent">%d%%</string>
+    <string name="kit_ready_label">جاهز</string>
+    <string name="kit_share_shortages">مشاركة قائمة النواقص</string>
+    <string name="kit_shortage_list_title">قائمة نواقص الحقيبة الطبية:</string>
+    <string name="kit_shortage_line">• %1$s: مطلوب %2$d %3$s</string>
+    <string name="kit_chip_bleeding">النزيف</string>
+    <string name="kit_chip_burns">الحروق</string>
+    <string name="kit_chip_tools">الأدوات</string>
+    <string name="kit_cat_bleeding">التحكم بالنزيف والصدمات</string>
+    <string name="kit_cat_burns">الحروق والضمادات والمطهرات</string>
+    <string name="kit_cat_tools">أدوات الفحص والأمان الشخصي</string>
+    <string name="kit_section_ready" formatted="false">جاهز 100%</string>
+    <string name="kit_section_missing">نواقص مسجلة</string>
+    <string name="kit_available">المتوفر: %1$d %2$s</string>
+    <string name="kit_expires">صالحة حتى %s</string>
+    <string name="kit_no_expiry">صلاحية غير محددة</string>
+    <string name="kit_remaining">متبقي %1$d فقط من أصل %2$d المطلوبة</string>
+    <string name="kit_status_full">مكتمل</string>
+    <string name="kit_status_low">مستوى منخفض</string>
+    <string name="kit_status_expiring">قريب الانتهاء</string>
+    <string name="kit_status_expired">منتهي الصلاحية</string>
+    <string name="kit_qty_badge">%dx</string>
+    <string name="increase">زيادة</string>
+    <string name="decrease">إنقاص</string>
+
+    <plurals name="steps_count">
+        <item quantity="zero">لا توجد خطوات</item>
+        <item quantity="one">خطوة واحدة</item>
+        <item quantity="two">خطوتان</item>
+        <item quantity="few">%d خطوات</item>
+        <item quantity="many">%d خطوة</item>
+        <item quantity="other">%d خطوة</item>
+    </plurals>
+    <plurals name="cases_count">
+        <item quantity="zero">لا توجد حالات</item>
+        <item quantity="one">حالة واحدة محفوظة</item>
+        <item quantity="two">حالتان محفوظتان</item>
+        <item quantity="few">%d حالات محفوظة</item>
+        <item quantity="many">%d حالة محفوظة</item>
+        <item quantity="other">%d حالة محفوظة</item>
+    </plurals>
 </resources>

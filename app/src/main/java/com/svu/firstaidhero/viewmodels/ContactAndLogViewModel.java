@@ -25,15 +25,39 @@ public class ContactAndLogViewModel extends AndroidViewModel {
         return repository.getAllContacts();
     }
 
+    public LiveData<CustomContact> getContactById(int contactId) {
+        return repository.getContactById(contactId);
+    }
+
     public void insertContact(CustomContact contact) {
         repository.insertContact(contact);
+    }
+
+    public void updateContact(CustomContact contact) {
+        repository.updateContact(contact);
+    }
+
+    public void deleteContact(CustomContact contact) {
+        repository.deleteContact(contact);
     }
 
     public LiveData<List<TreatedCase>> getAllTreatedCases() {
         return repository.getAllTreatedCases();
     }
 
+    public LiveData<TreatedCase> getTreatedCaseById(int logId) {
+        return repository.getTreatedCaseById(logId);
+    }
+
     public void insertTreatedCase(TreatedCase treatedCase) {
         repository.insertTreatedCase(treatedCase);
+    }
+
+    public void updateTreatedCase(TreatedCase treatedCase) {
+        repository.updateTreatedCase(treatedCase);
+    }
+
+    public void deleteTreatedCase(TreatedCase treatedCase) {
+        repository.deleteTreatedCase(treatedCase);
     }
 }

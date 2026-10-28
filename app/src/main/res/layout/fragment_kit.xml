@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Readiness summary -->
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Nabd.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Readiness ring: the box matches the ring exactly (no default inset) so nothing overlaps -->
+                <FrameLayout
+                    android:layout_width="88dp"
+                    android:layout_height="88dp">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progressReadiness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:max="100"
+                        app:indicatorColor="@color/nabd_primary"
+                        app:indicatorInset="0dp"
+                        app:indicatorSize="88dp"
+                        app:trackColor="@color/nabd_container"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvReadiness"
+                            style="@style/Nabd.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_black"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:textAlignment="center"
+                            android:textDirection="ltr"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            style="@style/Nabd.Text.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:includeFontPadding="false"
+                            android:text="@string/kit_ready_label"
+                            android:textAlignment="center"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Nabd.Text.Headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kit_title"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/tvKitSummary"
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShareShortages"
+                style="@style/Nabd.Button.Danger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="48dp"
+                android:text="@string/kit_share_shortages"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:icon="@drawable/ic_share" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupKit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:chipSpacingVertical="0dp"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipKitAll"
+            style="@style/Nabd.Chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipKitBleeding"
+            style="@style/Nabd.Chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipKitBurns"
+            style="@style/Nabd.Chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipKitTools"
+            style="@style/Nabd.Chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp" />
+</LinearLayout>
