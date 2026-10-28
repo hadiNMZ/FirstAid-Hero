@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Nabd.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- Triage stripe on the leading (right) edge -->
+        <View
+            android:id="@+id/viewCaseStripe"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/nabd_emergency" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- Badges -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCaseTriage"
+                    style="@style/Nabd.Text.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tvCaseAgo"
+                    style="@style/Nabd.Text.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_pill_blue"
+                    android:textColor="@color/nabd_on_surface_variant" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivCaseCritical"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_emergency"
+                    app:tint="@color/nabd_emergency" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCaseDescription"
+                style="@style/Nabd.Text.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="19sp" />
+
+            <!-- Date row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card_tonal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_schedule"
+                    app:tint="@color/nabd_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvCaseDate"
+                    style="@style/Nabd.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:textDirection="ltr"
+                    android:textSize="13sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvCaseNumber"
+                    style="@style/Nabd.Text.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tajawal_bold" />
+            </LinearLayout>
+
+            <!-- Procedural notes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_tip_blue"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Nabd.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="@font/tajawal_bold"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/procedural_notes"
+                    android:textColor="@color/nabd_primary"
+                    android:textSize="12sp"
+                    app:drawableStartCompat="@drawable/ic_notes"
+                    app:drawableTint="@color/nabd_primary" />
+
+                <TextView
+                    android:id="@+id/tvCaseNotes"
+                    style="@style/Nabd.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="4"
+                    android:paddingBottom="2dp"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Medical photo -->
+            <FrameLayout
+                android:id="@+id/photoBox"
+                android:layout_width="96dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivCasePhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/Nabd.Shape.Rounded" />
+
+                <TextView
+                    style="@style/Nabd.Text.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_pill_dark"
+                    android:text="@string/medical_photo"
+                    android:textColor="@color/white"
+                    android:textSize="9sp" />
+            </FrameLayout>
+
+            <!-- Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCaseReport"
+                android:maxLines="1"
+                app:autoSizeMaxTextSize="14sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeTextType="uniform"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:iconPadding="4dp"
+                    style="@style/Nabd.Button.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:text="@string/view_full_report"
+                    app:icon="@drawable/ic_visibility" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCaseShare"
+                android:maxLines="1"
+                app:autoSizeMaxTextSize="14sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeTextType="uniform"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:iconPadding="4dp"
+                    style="@style/Nabd.Button.Tonal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/share"
+                    app:icon="@drawable/ic_share" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCaseEdit"
+                    style="@style/Nabd.Button.Icon"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/edit"
+                    app:icon="@drawable/ic_edit" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

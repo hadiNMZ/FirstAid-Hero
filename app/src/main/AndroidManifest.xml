@@ -26,6 +26,20 @@
             android:name=".views.activities.EmergencyDetailActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".views.activities.AddContactActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".views.activities.CaseDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".views.activities.LogIncidentActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

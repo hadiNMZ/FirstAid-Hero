@@ -6,17 +6,68 @@
     android:orientation="vertical"
     android:layoutDirection="rtl"
     android:fitsSystemWindows="true"
-    android:background="@color/fa_gray_bg">
+    android:background="@color/nabd_background">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <!-- Session top bar: back, title + category, call pill, avatar -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/fa_red"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:navigationIconTint="@android:color/white"
-        app:title="@string/detail_title"
-        app:titleTextColor="@android:color/white" />
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/nabd_on_surface" />
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="2dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_logo" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Nabd.Text.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/protocol_session" />
+
+            <TextView
+                android:id="@+id/tvSessionCategory"
+                style="@style/Nabd.Text.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/nabd_primary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTopCall"
+            style="@style/Nabd.Button.Pill"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/emergency_number"
+            app:icon="@drawable/baseline_call_24" />
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -28,77 +79,341 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvDetailTitle"
+            <!-- Direct ambulance call banner -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Nabd.Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/fa_text_primary"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textAlignment="viewStart" />
+                app:cardBackgroundColor="@color/nabd_emergency"
+                app:cardCornerRadius="20dp"
+                app:strokeWidth="0dp">
 
-            <TextView
-                android:id="@+id/tvDetailBadge"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/bg_pill_white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Nabd.Text.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/direct_call_label"
+                            android:textColor="#E6FFFFFF" />
+
+                        <TextView
+                            style="@style/Nabd.Text.Headline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ambulance"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCallInline"
+                        style="@style/Nabd.Button.Pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:text="@string/call_110"
+                        android:textColor="@color/nabd_emergency"
+                        app:backgroundTint="@color/white"
+                        app:icon="@drawable/baseline_call_24"
+                        app:iconTint="@color/nabd_emergency" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Title card -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Nabd.Card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="12dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvDetailBadge"
+                            style="@style/Nabd.Text.Pill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tvStepCount"
+                            style="@style/Nabd.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="4dp"
+                            android:fontFamily="@font/tajawal_bold"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/nabd_primary"
+                            android:textSize="12sp"
+                            app:drawableStartCompat="@drawable/ic_schedule"
+                            app:drawableTint="@color/nabd_primary" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDetailTitle"
+                        style="@style/Nabd.Text.Headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/tvDetailCategory"
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical|start"
+                        app:drawableTint="@color/nabd_emergency" />
+
+                    <!-- Optional category photo (hero_<category> in res/drawable-nodpi) -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivHero"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:layout_marginTop="12dp"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone"
+                        app:shapeAppearanceOverlay="@style/Nabd.Shape.Rounded" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Responder safety -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_banner_teal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/safety_title"
+                        android:textColor="#CCFFFFFF" />
+
+                    <TextView
+                        style="@style/Nabd.Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:lineSpacingExtra="4dp"
+                        android:paddingBottom="2dp"
+                        android:text="@string/safety_body"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_circle_translucent">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_shield"
+                        app:tint="@color/white" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Stopwatch to time pressure, CPR cycles etc. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_info"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Nabd.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/tajawal_bold"
+                        android:text="@string/timer_title"
+                        android:textColor="@color/nabd_primary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvTimer"
+                        style="@style/Nabd.Text.Headline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/timer_zero"
+                        android:textDirection="ltr"
+                        android:textSize="34sp" />
+
+                    <TextView
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/timer_hint" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTimerToggle"
+                        style="@style/Nabd.Button.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/timer_start"
+                        app:icon="@drawable/ic_play" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTimerReset"
+                        style="@style/Nabd.Button.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:minHeight="36dp"
+                        android:text="@string/timer_reset"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Symptoms -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_soft"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_circle_mint">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_health"
+                            app:tint="@color/nabd_primary" />
+                    </FrameLayout>
+
+                    <TextView
+                        style="@style/Nabd.Text.Section"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/symptoms_long" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDetailSymptoms"
+                    style="@style/Nabd.Text.Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:lineSpacingExtra="8dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/nabd_on_surface"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Steps -->
             <TextView
+                style="@style/Nabd.Text.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/symptoms_header"
-                android:textColor="@color/fa_red_dark"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textAlignment="viewStart" />
-
-            <TextView
-                android:id="@+id/tvDetailSymptoms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:lineSpacingExtra="4dp"
-                android:textColor="@color/fa_text_secondary"
-                android:textSize="16sp"
-                android:textAlignment="viewStart" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/steps_header"
-                android:textColor="@color/fa_red_dark"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textAlignment="viewStart" />
+                android:text="@string/steps_long"
+                android:textSize="19sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSteps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:nestedScrollingEnabled="false" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCallEmergency"
+        style="@style/Nabd.Button.Danger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/call_emergency"
-        android:textSize="18sp"
-        app:backgroundTint="@color/fa_red" />
+        app:icon="@drawable/baseline_call_24" />
 </LinearLayout>

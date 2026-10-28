@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_guides"
+        android:icon="@drawable/baseline_library_books_24"
+        android:title="@string/nav_home" />
+
+    <item
+        android:id="@+id/nav_kit"
+        android:icon="@drawable/baseline_medical_services_24"
+        android:title="@string/nav_kit" />
+
+    <item
+        android:id="@+id/nav_cases"
+        android:icon="@drawable/baseline_assignment_24"
+        android:title="@string/nav_log" />
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable/baseline_call_24"
+        android:title="@string/nav_contacts" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/nav_settings" />
+</menu>

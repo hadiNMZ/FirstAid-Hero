@@ -10,5 +10,29 @@
     <color name="fa_gray_border">#E0E0E0</color>
     <color name="fa_text_primary">#212121</color>
     <color name="fa_text_secondary">#616161</color>
-
+    <!-- Nabd Al-Isaaf design palette -->
+    <color name="nabd_background">#F8F9FF</color>
+    <color name="nabd_surface">#FFFFFF</color>
+    <color name="nabd_primary">#00685F</color>
+    <color name="nabd_emergency">#BA0035</color>
+    <color name="nabd_emergency_badge">#E21E49</color>
+    <color name="nabd_on_surface">#0B1C30</color>
+    <color name="nabd_on_surface_variant">#3D4947</color>
+    <color name="nabd_outline">#6D7A77</color>
+    <color name="nabd_container_low">#EFF4FF</color>
+    <color name="nabd_container">#E5EEFF</color>
+    <color name="nabd_container_high">#D3E4FE</color>
+    <color name="nabd_container_blue">#DCE9FF</color>
+    <color name="nabd_info_blue">#007BB9</color>
+    <color name="nabd_mint">#89F5E7</color>
+    <color name="nabd_on_mint">#00201D</color>
+    <color name="nabd_pink">#FFDADA</color>
+    <color name="nabd_on_pink">#40000C</color>
+    <color name="nabd_mint_soft">#CFF7F1</color>
+    <color name="nabd_primary_dark">#004D46</color>
+    <color name="nabd_green">#1B8A54</color>
+    <color name="nabd_green_soft">#D7F5E6</color>
+    <color name="nabd_amber">#A86400</color>
+    <color name="nabd_amber_soft">#FFEFD2</color>
+    <color name="nabd_white_translucent">#33FFFFFF</color>
 </resources>

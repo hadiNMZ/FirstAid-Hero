@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.FirstAidHero" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.FirstAidHero" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/nabd_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/nabd_emergency</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/nabd_background</item>
+        <item name="colorOnSurface">@color/nabd_on_surface</item>
+        <item name="android:colorBackground">@color/nabd_background</item>
+        <item name="android:windowBackground">@color/nabd_background</item>
+        <item name="android:statusBarColor">@color/nabd_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:fontFamily">@font/tajawal_regular</item>
+        <item name="colorSecondaryContainer">@color/nabd_container_high</item>
+        <item name="colorOnSecondaryContainer">@color/nabd_on_surface</item>
     </style>
 
     <style name="Theme.FirstAidHero" parent="Base.Theme.FirstAidHero" />

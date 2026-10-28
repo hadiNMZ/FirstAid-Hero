@@ -30,6 +30,11 @@ public class TreatedCase {
     @ColumnInfo(name = "photo_uri")
     private String photoUri;
 
+    // One of the Triage constants: stable, urgent or critical (added in database version 2)
+    @NonNull
+    @ColumnInfo(name = "triage_level", defaultValue = "stable")
+    private String triageLevel = "stable";
+
     // Default empty constructor required by Room
     public TreatedCase() {
     }
@@ -85,5 +90,14 @@ public class TreatedCase {
 
     public void setPhotoUri(@Nullable String photoUri) {
         this.photoUri = photoUri;
+    }
+
+    @NonNull
+    public String getTriageLevel() {
+        return triageLevel;
+    }
+
+    public void setTriageLevel(@NonNull String triageLevel) {
+        this.triageLevel = triageLevel;
     }
 }

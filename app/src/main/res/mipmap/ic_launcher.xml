@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pre-Android 8 launcher icon: white rounded square with the red medical cross -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,6H84A18,18 0,0 1,102,24V84A18,18 0,0 1,84,102H24A18,18 0,0 1,6,84V24A18,18 0,0 1,24,6Z" />
+    <path
+        android:fillColor="#BA0035"
+        android:pathData="M36,45H72A4,4 0,0 1,76,49V59A4,4 0,0 1,72,63H36A4,4 0,0 1,32,59V49A4,4 0,0 1,36,45ZM49,32H59A4,4 0,0 1,63,36V72A4,4 0,0 1,59,76H49A4,4 0,0 1,45,72V36A4,4 0,0 1,49,32Z" />
+</vector>
