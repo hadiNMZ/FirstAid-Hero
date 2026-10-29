@@ -31,9 +31,11 @@ import com.svu.firstaidhero.views.adapters.ContactAdapter;
 /** National hotlines plus the user's own saved contacts. */
 public class ContactsFragment extends Fragment {
 
-    // Syrian national lines
-    private static final String NUMBER_FIRE = "113";
+    // Syrian national emergency lines
     private static final String NUMBER_POLICE = "112";
+    private static final String NUMBER_FIRE = "113";
+    private static final String NUMBER_TRAFFIC = "115";
+    private static final String NUMBER_RED_CRESCENT = "133";
 
     private ContactAndLogViewModel viewModel;
 
@@ -46,12 +48,26 @@ public class ContactsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        // 1. Central Ambulance (110)
         view.findViewById(R.id.tileAmbulance).setOnClickListener(
                 v -> Dialer.dial(requireContext(), Dialer.EMERGENCY_NUMBER));
-        setupTile(view.findViewById(R.id.tileFire), NUMBER_FIRE,
-                R.string.line_fire, R.drawable.ic_fire, R.color.nabd_emergency);
+
+        // 2. شرطة النجدة (112)
         setupTile(view.findViewById(R.id.tilePolice), NUMBER_POLICE,
                 R.string.line_police, R.drawable.ic_police, R.color.nabd_info_blue);
+
+        // 3. الإطفاء / الدفاع المدني (113)
+        setupTile(view.findViewById(R.id.tileFire), NUMBER_FIRE,
+                R.string.line_fire, R.drawable.ic_fire, R.color.nabd_emergency);
+
+        // 4. شرطة المرور (115)
+        setupTile(view.findViewById(R.id.tileTraffic), NUMBER_TRAFFIC,
+                R.string.line_traffic, R.drawable.ic_police, R.color.nabd_info_blue);
+
+        // 5. الهلال الأحمر السوري (133)
+        setupTile(view.findViewById(R.id.tileRedCrescent), NUMBER_RED_CRESCENT,
+                R.string.line_red_crescent, R.drawable.ic_health, R.color.nabd_emergency);
 
         RecyclerView rvContacts = view.findViewById(R.id.rvContacts);
         View emptyState = view.findViewById(R.id.emptyContacts);

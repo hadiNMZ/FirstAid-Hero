@@ -16,7 +16,9 @@ import com.svu.firstaidhero.database.entities.Emergency;
 import com.svu.firstaidhero.database.entities.KitItem;
 import com.svu.firstaidhero.database.entities.Step;
 import com.svu.firstaidhero.database.entities.TreatedCase;
+import com.svu.firstaidhero.utils.TextSanitizer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,8 +56,32 @@ public class FirstAidRepository {
     public LiveData<List<Emergency>> searchEmergencies(String query) {
         MutableLiveData<List<Emergency>> data = new MutableLiveData<>();
         executorService.execute(() -> {
-            List<Emergency> result = emergencyDao.searchEmergencies(query);
-            data.postValue(result);
+            List<Emergency> all = emergencyDao.getAllEmergencies();
+            if (query == null || query.trim().isEmpty()) {
+                data.postValue(all);
+                return;
+            }
+
+            String normalizedQuery = TextSanitizer.normalizeArabic(query);
+            List<Emergency> filtered = new ArrayList<>();
+
+            for (Emergency e : all) {
+                if (e == null) continue;
+                String normalizedTarget = TextSanitizer.normalizeArabic(
+                        e.getTitle() + " " + e.getSymptoms() + " " + e.getKeywords()
+                );
+
+                if (normalizedTarget.contains(normalizedQuery)) {
+                    filtered.add(e);
+                }
+            }
+
+            // Fallback to database query if needed
+            if (filtered.isEmpty()) {
+                filtered = emergencyDao.searchEmergencies(query);
+            }
+
+            data.postValue(filtered);
         });
         return data;
     }

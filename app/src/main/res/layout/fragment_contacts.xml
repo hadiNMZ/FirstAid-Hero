@@ -51,92 +51,130 @@
                 app:icon="@drawable/ic_add" />
         </LinearLayout>
 
-        <!-- National hotlines: one large tile, two small -->
-        <LinearLayout
+        <!-- National Hotlines Header -->
+        <TextView
+            style="@style/Nabd.Text.Label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical|start"
+            android:text="@string/national_lines"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_siren"
+            app:drawableTint="@color/nabd_emergency" />
+
+        <!-- 1. Central Ambulance (110) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/tileAmbulance"
+            style="@style/Nabd.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardBackgroundColor="@color/nabd_emergency"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="0dp">
 
             <LinearLayout
-                android:id="@+id/tileAmbulance"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.7"
-                android:background="@drawable/bg_tile_ambulance"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:orientation="vertical"
-                android:padding="14dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_box_translucent">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_siren"
+                        app:tint="@color/white" />
+                </FrameLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <FrameLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_icon_box_translucent">
-
-                        <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_siren"
-                            app:tint="@color/white" />
-                    </FrameLayout>
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        style="@style/Nabd.Text.Headline"
+                        style="@style/Nabd.Text.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/emergency_number"
+                        android:text="@string/line_ambulance_full"
                         android:textColor="@color/white"
-                        android:textSize="28sp" />
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/available_247"
+                        android:textColor="#D9FFFFFF" />
                 </LinearLayout>
 
                 <TextView
-                    style="@style/Nabd.Text.Title"
-                    android:layout_width="match_parent"
+                    style="@style/Nabd.Text.Headline"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/line_ambulance_full"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/Nabd.Text.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/available_247"
-                    android:textColor="#D9FFFFFF" />
+                    android:text="110"
+                    android:textColor="@color/white"
+                    android:textSize="26sp" />
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <include
-                android:id="@+id/tileFire"
-                layout="@layout/view_hotline_tile"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1" />
+        <!-- 2. Grid of Secondary National Emergency Hotlines (112, 113, 115, 133) -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:columnCount="2"
+            android:rowCount="2">
 
+            <!-- شرطة النجدة (112) -->
             <include
                 android:id="@+id/tilePolice"
                 layout="@layout/view_hotline_tile"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- الإطفاء والدفاع المدني (113) -->
+            <include
+                android:id="@+id/tileFire"
+                layout="@layout/view_hotline_tile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- شرطة المرور (115) -->
+            <include
+                android:id="@+id/tileTraffic"
+                layout="@layout/view_hotline_tile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="4dp" />
+
+            <!-- الهلال الأحمر السوري (133) -->
+            <include
+                android:id="@+id/tileRedCrescent"
+                layout="@layout/view_hotline_tile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="4dp" />
+        </GridLayout>
 
         <!-- Private contacts -->
         <LinearLayout

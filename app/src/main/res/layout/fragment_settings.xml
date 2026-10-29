@@ -26,12 +26,74 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_subtitle" />
 
+        <!-- Medical Kit Access Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMedicalKit"
+            style="@style/Nabd.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_box_teal">
+
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/baseline_medical_services_24"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Nabd.Text.Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kit_title" />
+
+                    <TextView
+                        android:id="@+id/tvKitSummary"
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="عرض المستلزمات الطبية وإدارة نواقص الحقيبة" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_chevron_forward"
+                    app:tint="@color/nabd_primary" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Database status -->
         <com.google.android.material.card.MaterialCardView
             style="@style/Nabd.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -255,30 +317,30 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnExportCases"
-                android:maxLines="1"
-                app:autoSizeMaxTextSize="14sp"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeTextType="uniform"
                         style="@style/Nabd.Button.Small"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:maxLines="1"
                         android:text="@string/pref_export_button"
+                        app:autoSizeMaxTextSize="14sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeTextType="uniform"
                         app:icon="@drawable/ic_share" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnClearCases"
-                android:maxLines="1"
-                app:autoSizeMaxTextSize="14sp"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeTextType="uniform"
                         style="@style/Nabd.Button.Tonal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
+                        android:maxLines="1"
                         android:text="@string/pref_clear_button"
                         android:textColor="@color/nabd_emergency"
+                        app:autoSizeMaxTextSize="14sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeTextType="uniform"
                         app:icon="@drawable/ic_delete"
                         app:iconTint="@color/nabd_emergency" />
                 </LinearLayout>

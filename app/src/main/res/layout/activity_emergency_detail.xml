@@ -206,7 +206,7 @@
                         android:gravity="center_vertical|start"
                         app:drawableTint="@color/nabd_emergency" />
 
-                    <!-- Optional category photo (hero_<category> in res/drawable-nodpi) -->
+                    <!-- Optional category photo -->
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivHero"
                         android:layout_width="match_parent"
@@ -216,6 +216,69 @@
                         android:scaleType="centerCrop"
                         android:visibility="gone"
                         app:shapeAppearanceOverlay="@style/Nabd.Shape.Rounded" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CPR Metronome Card (120 BPM) - Visible ONLY on CPR/Heart conditions -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCprMetronome"
+                style="@style/Nabd.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#FFF0F3"
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/nabd_emergency"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Nabd.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/tajawal_bold"
+                            android:text="@string/cpr_title"
+                            android:textColor="@color/nabd_emergency"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvCprBpm"
+                            style="@style/Nabd.Text.Headline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/cpr_bpm_label"
+                            android:textColor="@color/nabd_emergency"
+                            android:textSize="26sp" />
+
+                        <TextView
+                            style="@style/Nabd.Text.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/cpr_subtitle" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCprToggle"
+                        style="@style/Nabd.Button.Danger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cpr_start"
+                        app:icon="@drawable/ic_play" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -271,7 +334,7 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Stopwatch to time pressure, CPR cycles etc. -->
+            <!-- TTS Voice Assistant to speak first aid steps -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,24 +355,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/tajawal_bold"
-                        android:text="@string/timer_title"
+                        android:text="@string/tts_title"
                         android:textColor="@color/nabd_primary"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tvTimer"
-                        style="@style/Nabd.Text.Headline"
+                        android:id="@+id/tvTtsStatus"
+                        style="@style/Nabd.Text.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/timer_zero"
-                        android:textDirection="ltr"
-                        android:textSize="34sp" />
+                        android:layout_marginTop="4dp"
+                        android:text="@string/tts_status_idle"
+                        android:textColor="@color/nabd_on_surface"
+                        android:textSize="16sp" />
 
                     <TextView
                         style="@style/Nabd.Text.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/timer_hint" />
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tts_subtitle" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -318,21 +383,21 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTimerToggle"
+                        android:id="@+id/btnTtsToggle"
                         style="@style/Nabd.Button.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/timer_start"
-                        app:icon="@drawable/ic_play" />
+                        android:text="@string/tts_start"
+                        app:icon="@drawable/ic_volume_up" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTimerReset"
+                        android:id="@+id/btnTtsRestart"
                         style="@style/Nabd.Button.Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:minHeight="36dp"
-                        android:text="@string/timer_reset"
+                        android:text="@string/tts_restart"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>

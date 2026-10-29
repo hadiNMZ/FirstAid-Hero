@@ -1,15 +1,24 @@
 package com.svu.firstaidhero.views.fragments;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
+import android.Manifest;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +26,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -48,6 +58,7 @@ public class GuidesFragment extends Fragment {
     private EmergencyViewModel viewModel;
     private EmergencyAdapter adapter;
 
+    private TextInputLayout tilSearch;
     private TextInputEditText etSearch;
     private ChipGroup chipGroup;
     private MaterialButtonToggleGroup toggleSort;
@@ -59,19 +70,24 @@ public class GuidesFragment extends Fragment {
     // The last list received from the database, before chip filtering
     private List<Emergency> latestList = new ArrayList<>();
 
+    private SpeechRecognizer speechRecognizer;
+    private boolean isListening = false;
+
+    // 1-second silence timer
+    private final Handler silenceHandler = new Handler(Looper.getMainLooper());
+    private final Runnable silenceRunnable = this::stopListeningMode;
+
     private final Observer<List<Emergency>> emergencyObserver = list -> {
         latestList = (list != null) ? list : new ArrayList<>();
         applyFilter();
     };
 
-    private final ActivityResultLauncher<Intent> voiceSearch =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() != Activity.RESULT_OK || result.getData() == null) return;
-                ArrayList<String> matches =
-                        result.getData().getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                if (matches != null && !matches.isEmpty()) {
-                    etSearch.setText(matches.get(0));
-                    etSearch.setSelection(etSearch.length());
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    toggleListeningMode();
+                } else {
+                    Toast.makeText(requireContext(), "يتطلب البحث الصوتي إذن استخدام الميكروفون", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -86,7 +102,7 @@ public class GuidesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(EmergencyViewModel.class);
 
-        TextInputLayout tilSearch = view.findViewById(R.id.tilSearch);
+        tilSearch = view.findViewById(R.id.tilSearch);
         etSearch = view.findViewById(R.id.etSearch);
         chipGroup = view.findViewById(R.id.chipGroup);
         toggleSort = view.findViewById(R.id.toggleSort);
@@ -115,22 +131,179 @@ public class GuidesFragment extends Fragment {
             }
         });
 
-        tilSearch.setEndIconOnClickListener(v -> startVoiceSearch());
+        // Stop listening if user hits search on keyboard
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                stopListeningMode();
+                return false;
+            }
+            return false;
+        });
+
+        tilSearch.setEndIconOnClickListener(v -> toggleListeningModeWithPermission());
         chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> applyFilter());
         toggleSort.addOnButtonCheckedListener((group, checkedId, isChecked) -> applyFilter());
 
         observeEmergencies("");
     }
 
-    private void startVoiceSearch() {
+    private void toggleListeningModeWithPermission() {
+        if (getContext() == null) return;
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED) {
+            toggleListeningMode();
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+        }
+    }
+
+    private void toggleListeningMode() {
+        if (isListening) {
+            stopListeningMode();
+        } else {
+            startListeningMode();
+        }
+    }
+
+    private void startListeningMode() {
+        if (getActivity() == null) return;
+
+        if (speechRecognizer != null) {
+            try {
+                speechRecognizer.stopListening();
+                speechRecognizer.destroy();
+            } catch (Exception ignored) { }
+            speechRecognizer = null;
+        }
+
+        try {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireActivity());
+        } catch (Exception e) {
+            return;
+        }
+
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar");
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.voice_search_prompt));
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar-SA");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "ar");
+        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                isListening = true;
+                setListeningVisuals(true);
+                resetSilenceTimer();
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+                resetSilenceTimer();
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+                if (rmsdB > 2.0f) {
+                    resetSilenceTimer();
+                }
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+                resetSilenceTimer();
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+                resetSilenceTimer();
+                if (partialResults != null && etSearch != null) {
+                    ArrayList<String> matches = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    if (matches != null && !matches.isEmpty()) {
+                        etSearch.setText(matches.get(0));
+                        etSearch.setSelection(etSearch.length());
+                    }
+                }
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+                resetSilenceTimer();
+                if (results != null && etSearch != null) {
+                    ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    if (matches != null && !matches.isEmpty()) {
+                        etSearch.setText(matches.get(0));
+                        etSearch.setSelection(etSearch.length());
+                    }
+                }
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                resetSilenceTimer();
+            }
+
+            @Override
+            public void onError(int error) {
+                stopListeningMode();
+            }
+
+            @Override public void onEvent(int eventType, Bundle params) { }
+        });
+
         try {
-            voiceSearch.launch(intent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(requireContext(), R.string.voice_not_available, Toast.LENGTH_SHORT).show();
+            speechRecognizer.startListening(intent);
+        } catch (Exception e) {
+            stopListeningMode();
+        }
+    }
+
+    private void resetSilenceTimer() {
+        silenceHandler.removeCallbacks(silenceRunnable);
+        silenceHandler.postDelayed(silenceRunnable, 1000); // 1000ms = 1 second of silence
+    }
+
+    private void stopListeningMode() {
+        isListening = false;
+        silenceHandler.removeCallbacks(silenceRunnable);
+
+        if (speechRecognizer != null) {
+            try {
+                speechRecognizer.stopListening();
+                speechRecognizer.destroy();
+            } catch (Exception ignored) { }
+            speechRecognizer = null;
+        }
+
+        setListeningVisuals(false);
+    }
+
+    private void setListeningVisuals(boolean listening) {
+        if (tilSearch == null || getContext() == null) return;
+
+        int primaryColor = ContextCompat.getColor(requireContext(), R.color.nabd_primary);
+        int emergencyRed = ContextCompat.getColor(requireContext(), R.color.nabd_emergency);
+        int mintBg = Color.parseColor("#E0F2F1");
+        int transparent = Color.TRANSPARENT;
+
+        int startBg = listening ? transparent : mintBg;
+        int endBg = listening ? mintBg : transparent;
+
+        ValueAnimator colorAnim = ValueAnimator.ofObject(new ArgbEvaluator(), startBg, endBg);
+        colorAnim.setDuration(300);
+        colorAnim.addUpdateListener(animator -> {
+            if (tilSearch != null) {
+                tilSearch.setBoxBackgroundColor((int) animator.getAnimatedValue());
+            }
+        });
+        colorAnim.start();
+
+        if (listening) {
+            tilSearch.setEndIconTintList(ColorStateList.valueOf(emergencyRed));
+            tilSearch.setPlaceholderText("جاري الاستماع ل صوتك…");
+        } else {
+            tilSearch.setEndIconTintList(ColorStateList.valueOf(primaryColor));
+            tilSearch.setPlaceholderText(null);
         }
     }
 
@@ -191,6 +364,14 @@ public class GuidesFragment extends Fragment {
 
     private void setChipCount(int chipId, int labelRes, int count) {
         Chip chip = chipGroup.findViewById(chipId);
-        chip.setText(getString(R.string.filter_count, getString(labelRes), count));
+        if (chip != null) {
+            chip.setText(getString(R.string.filter_count, getString(labelRes), count));
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        stopListeningMode();
+        super.onDestroyView();
     }
 }

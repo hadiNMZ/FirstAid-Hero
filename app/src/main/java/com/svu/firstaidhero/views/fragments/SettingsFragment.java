@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.svu.firstaidhero.MainActivity;
 import com.svu.firstaidhero.R;
 import com.svu.firstaidhero.database.entities.Emergency;
 import com.svu.firstaidhero.database.entities.TreatedCase;
@@ -27,7 +28,7 @@ import com.svu.firstaidhero.viewmodels.EmergencyViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Preferences, database status and case-log export/clear. */
+/** Preferences, database status, medical kit access, and case-log export/clear. */
 public class SettingsFragment extends Fragment {
 
     private List<TreatedCase> cases = new ArrayList<>();
@@ -43,6 +44,13 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TextView tvProtocolCount = view.findViewById(R.id.tvProtocolCount);
         TextView tvCriticalCount = view.findViewById(R.id.tvCriticalCount);
+
+        // Click listener to navigate to the Medical Kit Fragment tab
+        view.findViewById(R.id.cardMedicalKit).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).showTab(MainActivity.TAG_KIT);
+            }
+        });
 
         EmergencyViewModel emergencies = new ViewModelProvider(this).get(EmergencyViewModel.class);
         emergencies.getAllEmergencies().observe(getViewLifecycleOwner(), list -> {

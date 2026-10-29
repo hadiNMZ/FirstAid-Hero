@@ -29,14 +29,37 @@
     <string name="direct_call_label">اتصال مباشر بالإسعاف</string>
     <string name="ambulance">سيارة الإسعاف</string>
     <string name="call_110">اتصل 110</string>
+
+    <!-- TTS Voice Assistant Strings -->
+    <string name="tts_title">المساعد الصوتي للإسعاف</string>
+    <string name="tts_subtitle">استمع لخطوات الإسعاف الأولي خطوة بخطوة باللغة العربية</string>
+    <string name="tts_start">قراءة الخطوات</string>
+    <string name="tts_stop">إيقاف القراءة</string>
+    <string name="tts_restart">إعادة القراءة</string>
+    <string name="tts_status_idle">جاهز للقراءة الصوتية</string>
+    <string name="tts_status_speaking">جاري القراءة الصوتية…</string>
+    <string name="tts_not_supported">خدمة القراءة الصوتية غير متوفرة على هذا الجهاز</string>
+
+    <!-- CPR 120 BPM Metronome Strings -->
+    <string name="cpr_title">مساعد ضغطات الصدر (CPR)</string>
+    <string name="cpr_subtitle">صوت بيب إيقاعي يطابق المعدل الطبي للإنعاش (120 ضغطة/دقيقة)</string>
+    <string name="cpr_bpm_label">120 BPM</string>
+    <string name="cpr_start">بدء إيقاع 120 BPM</string>
+    <string name="cpr_stop">إيقاف الإيقاع</string>
+
     <string name="symptoms_long">الأعراض السريرية للتعرف على الحالة</string>
-    <string name="steps_long">خطوات الإسعاف الأولي المتبعة</string>
+    <string name="steps_long">خطوات الإسعاف الأولية المتبعة</string>
     <string name="contacts_title">جهات اتصال الطوارئ</string>
     <string name="contacts_subtitle">أرقام الطوارئ الوطنية وجهات اتصالك الخاصة في مكان واحد</string>
     <string name="national_lines">الخطوط الوطنية السريعة</string>
     <string name="line_ambulance">الإسعاف</string>
     <string name="line_health">الطوارئ الصحية</string>
     <string name="line_civil">الدفاع المدني</string>
+    <string name="line_police">شرطة النجدة</string>
+    <string name="line_fire">الإطفاء والدفاع المدني</string>
+    <string name="line_traffic">شرطة المرور</string>
+    <string name="line_red_crescent">الهلال الأحمر السوري</string>
+
     <string name="saved_contacts">أرقامك الشخصية والطبية المحفوظة</string>
     <string name="no_contacts">لم تُضف أي جهة اتصال بعد</string>
     <string name="offline_ready_title">جاهزية تامة بدون شبكة</string>
@@ -98,7 +121,6 @@
     <string name="quick_choking">اختناق</string>
     <string name="quick_burn">حرق درجة ثانية</string>
     <string name="quick_faint">إغماء وفقدان وعي</string>
-    <!-- Home / detail extras -->
     <string name="voice_search">بحث صوتي</string>
     <string name="voice_search_prompt">قل اسم الحالة أو العرض</string>
     <string name="voice_not_available">البحث الصوتي غير متاح على هذا الجهاز</string>
@@ -106,6 +128,7 @@
     <string name="sort_most_severe">الأشد خطورة</string>
     <string name="sort_alpha">أ - ي</string>
     <string name="protocol_session">جلسة البروتوكول</string>
+
     <string name="timer_title">مؤقت الإسعاف</string>
     <string name="timer_zero">00:00</string>
     <string name="timer_hint">لقياس مدة الضغط أو دورات الإنعاش</string>
@@ -138,7 +161,6 @@
     <string name="pref_nothing_to_export">لا توجد حالات لمشاركتها</string>
     <string name="version_label">نبض الإسعاف v%s</string>
 
-
     <string name="nav_home">الرئيسية</string>
     <string name="nav_log">السجل</string>
 
@@ -152,7 +174,6 @@
     <string name="cat_weather">الحرارة والبرد</string>
     <string name="cat_general">إسعافات عامة</string>
 
-    <!-- Guides / detail -->
     <string name="immediate_action">إجراء فوري</string>
     <string name="critical_alert">تنبيه حرج • إجراء فوري</string>
     <string name="minor_alert">إصابة بسيطة • رعاية منزلية</string>
@@ -161,12 +182,10 @@
     <string name="step_label">الخطوة %s</string>
     <string name="filter_count">%1$s (%2$d)</string>
 
-    <!-- Triage -->
     <string name="triage_short_stable">مستقر</string>
     <string name="triage_short_urgent">عاجل</string>
     <string name="triage_short_critical">حرج</string>
 
-    <!-- Cases log -->
     <string name="new_case_banner">تسجيل حالة إسعاف جديدة</string>
     <string name="new_case_banner_sub">توثيق فوري للأعراض، الإجراءات، والوقت</string>
     <string name="cases_section">سجل الوقائع والإجراءات الإسعافية</string>
@@ -190,9 +209,6 @@
     <string name="time_hours">قبل %d س</string>
     <string name="time_days">قبل %d يوم</string>
 
-    <!-- Contacts -->
-    <string name="line_police">الشرطة</string>
-    <string name="line_fire">الإطفاء</string>
     <string name="available_247">متاح على مدار الساعة</string>
     <string name="private_contacts">جهات الاتصال الخاصة والطبية</string>
     <string name="registered_count">%d مسجلة</string>
@@ -200,7 +216,6 @@
     <string name="sos_text">رسالة طوارئ: أحتاج إلى مساعدة عاجلة. أرجو الاتصال بي فوراً.</string>
     <string name="more_options">خيارات إضافية</string>
 
-    <!-- Kit -->
     <string name="kit_title">جاهزية الحقيبة الطبية</string>
     <string name="kit_summary">%1$d عنصر • %2$d نواقص • %3$d قريبة الانتهاء</string>
     <string name="kit_ready_percent">%d%%</string>
