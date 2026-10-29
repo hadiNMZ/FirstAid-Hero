@@ -24,9 +24,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.svu.firstaidhero.R;
 import com.svu.firstaidhero.database.entities.CustomContact;
 import com.svu.firstaidhero.utils.Dialer;
+import com.svu.firstaidhero.utils.SosDispatcher;
 import com.svu.firstaidhero.viewmodels.ContactAndLogViewModel;
 import com.svu.firstaidhero.views.activities.AddContactActivity;
 import com.svu.firstaidhero.views.adapters.ContactAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** National hotlines plus the user's own saved contacts. */
 public class ContactsFragment extends Fragment {
@@ -38,6 +42,7 @@ public class ContactsFragment extends Fragment {
     private static final String NUMBER_RED_CRESCENT = "133";
 
     private ContactAndLogViewModel viewModel;
+    private List<CustomContact> savedContactsList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -48,6 +53,13 @@ public class ContactsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        // SOS SMS Dispatcher Button for all contacts
+        view.findViewById(R.id.btnSendSosSms).setOnClickListener(v -> {
+            SosDispatcher.prepareSosMessage(getActivity(), message -> {
+                SosDispatcher.dispatchSms(requireContext(), savedContactsList, message);
+            });
+        });
 
         // 1. Central Ambulance (110)
         view.findViewById(R.id.tileAmbulance).setOnClickListener(
@@ -86,14 +98,23 @@ public class ContactsFragment extends Fragment {
             public void onDelete(CustomContact contact) {
                 confirmDelete(contact);
             }
+
+            @Override
+            public void onSendSms(CustomContact contact) {
+                if (contact == null) return;
+                SosDispatcher.prepareSosMessage(getActivity(), message -> {
+                    SosDispatcher.dispatchSmsToSinglePerson(requireContext(), contact.getPhoneNumber(), message);
+                });
+            }
         });
         rvContacts.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvContacts.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(ContactAndLogViewModel.class);
         viewModel.getAllContacts().observe(getViewLifecycleOwner(), contacts -> {
-            adapter.submitList(contacts);
-            int count = contacts == null ? 0 : contacts.size();
+            savedContactsList = contacts != null ? contacts : new ArrayList<>();
+            adapter.submitList(savedContactsList);
+            int count = savedContactsList.size();
             tvCount.setText(getString(R.string.registered_count, count));
             emptyState.setVisibility(count == 0 ? View.VISIBLE : View.GONE);
         });

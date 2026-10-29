@@ -51,6 +51,71 @@
                 app:icon="@drawable/ic_add" />
         </LinearLayout>
 
+        <!-- Emergency SOS SMS Location Dispatcher Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSosSmsDispatch"
+            style="@style/Nabd.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#FFF0F3"
+            app:cardCornerRadius="20dp"
+            app:strokeColor="@color/nabd_emergency"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_circle_pink">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_siren"
+                        app:tint="@color/nabd_emergency" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Nabd.Text.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="إرسال نداء SOS بالطوارئ"
+                        android:textColor="@color/nabd_emergency"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        style="@style/Nabd.Text.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="تحديد موقع GPS وإرساله فوراً في رسالة SMS" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSendSosSms"
+                    style="@style/Nabd.Button.Danger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="إرسال SOS"
+                    app:icon="@drawable/ic_share" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- National Hotlines Header -->
         <TextView
             style="@style/Nabd.Text.Label"

@@ -19,11 +19,13 @@ import java.util.Objects;
 
 public class ContactAdapter extends ListAdapter<CustomContact, ContactAdapter.ContactViewHolder> {
 
-    /** Edit and delete actions on a contact card. */
+    /** Edit, delete, and send SMS actions on a contact card. */
     public interface Listener {
         void onEdit(CustomContact contact);
 
         void onDelete(CustomContact contact);
+
+        void onSendSms(CustomContact contact);
     }
 
     private Listener listener;
@@ -83,7 +85,9 @@ public class ContactAdapter extends ListAdapter<CustomContact, ContactAdapter.Co
                 if (hasPosition()) Dialer.dial(v.getContext(), current().getPhoneNumber());
             });
             itemView.findViewById(R.id.btnMessageContact).setOnClickListener(v -> {
-                if (hasPosition()) {
+                if (listener != null && hasPosition()) {
+                    listener.onSendSms(current());
+                } else if (hasPosition()) {
                     Dialer.sendSms(v.getContext(), current().getPhoneNumber(),
                             v.getContext().getString(R.string.sos_text));
                 }
