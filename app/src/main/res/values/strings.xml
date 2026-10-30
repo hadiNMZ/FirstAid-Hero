@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FirstAid Hero</string>
-    <string name="main_title">المسعف الأول - FirstAid Hero</string>
+    <string name="main_title">FirstAid Hero</string>
     <string name="search_hint">ابحث عن حالة طارئة أو عرض (مثل: حروق، اختناق)...</string>
     <string name="filter_all">الكل</string>
     <string name="filter_common">حالات شائعة</string>
@@ -11,7 +11,7 @@
     <string name="steps_header">خطوات الإسعاف</string>
     <string name="call_emergency">اتصل بالإسعاف (110)</string>
     <string name="dialer_not_found">لا يوجد تطبيق اتصال على هذا الجهاز</string>
-    <string name="app_title_nabd">نبض الإسعاف</string>
+    <string name="app_title_nabd">FirstAid Hero</string>
     <string name="app_subtitle_nabd">بروتوكولات الطوارئ الطبية السريعة</string>
     <string name="emergency_button">طوارئ 110</string>
     <string name="emergency_number">110</string>
@@ -159,7 +159,7 @@
     <string name="pref_clear_confirm">سيتم حذف جميع الحالات المسجلة نهائياً. هل أنت متأكد؟</string>
     <string name="pref_cleared">تم حذف جميع الحالات</string>
     <string name="pref_nothing_to_export">لا توجد حالات لمشاركتها</string>
-    <string name="version_label">نبض الإسعاف v%s</string>
+    <string name="version_label">FirstAid Hero v%s</string>
 
     <string name="nav_home">الرئيسية</string>
     <string name="nav_log">السجل</string>

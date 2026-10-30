@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -26,21 +25,20 @@ import java.util.Locale;
 
 /**
  * Panic-Proof Emergency SOS SMS Location Dispatcher.
- * Resolves location within 5 seconds max (with 15-min cache optimization),
- * prompts to enable GPS if turned off, formats compact Arabic payload, and dispatches via SMS.
+ * Directly queries device's latest recorded location (works even when GPS is turned off),
+ * formats compact Arabic coordinates payload, and dispatches via SMS.
  */
 public class SosDispatcher {
 
     public static final int REQUEST_LOCATION_PERMISSION = 2001;
 
-    private static final long MAX_CACHE_AGE_MS = 15 * 60 * 1000; // 15 minutes
     private static final long GPS_TIMEOUT_MS = 5000; // 5 seconds strict timeout
 
     private static final String FALLBACK_NO_PERMISSION =
             "نداء استغاثة طارئ! (تعذر تحديد موقع GPS تلقائياً - يرجى الاتصال بي فوراً)";
 
     private static final String FALLBACK_TIMEOUT_OR_NULL =
-            "نداء استغاثة طارئ! (تعذر التقاط الإحداثيات عبر الأقمار الصناعية - يرجى الاتصال بي فوراً)";
+            "نداء استغاثة طارئ! (تعذر التقاط الإحداثيات - يرجى الاتصال بي فوراً)";
 
     public interface LocationCallback {
         void onMessageReady(String messageText);
@@ -73,6 +71,23 @@ public class SosDispatcher {
             return;
         }
 
+        // a. Query latest recorded location directly from device (works even when GPS is turned off!)
+        Location bestLocation = null;
+        try {
+            Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location netLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location passiveLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+            bestLocation = getMostRecentLocation(gpsLocation, netLocation, passiveLocation);
+        } catch (SecurityException ignored) { }
+
+        // b. If a recorded location exists on the device, format and send it IMMEDIATELY with zero delay!
+        if (bestLocation != null) {
+            callback.onMessageReady(formatLocationMessage(bestLocation));
+            return;
+        }
+
+        // c. If NO cached location exists, check if live GPS is enabled
         boolean isGpsEnabled = false;
         boolean isNetworkEnabled = false;
         try {
@@ -80,39 +95,13 @@ public class SosDispatcher {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ignored) { }
 
-        // Prompt user to enable GPS if turned off
         if (!isGpsEnabled && !isNetworkEnabled) {
-            try {
-                Toast.makeText(activity, "يرجى تفعيل خدمات الموقع (GPS) لتحديد موقع الاستغاثة", Toast.LENGTH_LONG).show();
-                Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                activity.startActivity(settingsIntent);
-            } catch (Exception ignored) { }
-        }
-
-        // a. Query getLastKnownLocation from GPS_PROVIDER and fallback to NETWORK_PROVIDER
-        Location bestLocation = null;
-        try {
-            Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Location netLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            if (gpsLocation != null && netLocation != null) {
-                bestLocation = (gpsLocation.getTime() > netLocation.getTime()) ? gpsLocation : netLocation;
-            } else if (gpsLocation != null) {
-                bestLocation = gpsLocation;
-            } else {
-                bestLocation = netLocation;
-            }
-        } catch (SecurityException ignored) { }
-
-        long currentTime = System.currentTimeMillis();
-
-        // b. If cached location exists and is fresh (< 15 mins), use it immediately with zero delay!
-        if (bestLocation != null && (currentTime - bestLocation.getTime()) < MAX_CACHE_AGE_MS) {
-            callback.onMessageReady(formatLocationMessage(bestLocation));
+            // Devices with no recorded location history and disabled GPS return fallback notice
+            callback.onMessageReady(FALLBACK_TIMEOUT_OR_NULL);
             return;
         }
 
-        // c. Request a single location update backed by 5000ms strict timeout
+        // d. Request a single live location update backed by 5000ms strict timeout
         Handler handler = new Handler(Looper.getMainLooper());
         final boolean[] isDispatched = {false};
 
@@ -139,7 +128,7 @@ public class SosDispatcher {
             @Override public void onProviderDisabled(String provider) { }
         };
 
-        // Strict 5-second timeout runnable
+        // Strict 5-second timeout
         Runnable timeoutRunnable = () -> {
             if (isDispatched[0]) return;
             isDispatched[0] = true;
@@ -156,19 +145,22 @@ public class SosDispatcher {
         try {
             if (isGpsEnabled) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener, Looper.getMainLooper());
-            } else if (isNetworkEnabled) {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener, Looper.getMainLooper());
             } else {
-                // No providers enabled
-                handler.removeCallbacks(timeoutRunnable);
-                isDispatched[0] = true;
-                callback.onMessageReady(FALLBACK_TIMEOUT_OR_NULL);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener, Looper.getMainLooper());
             }
         } catch (SecurityException e) {
             handler.removeCallbacks(timeoutRunnable);
             isDispatched[0] = true;
             callback.onMessageReady(FALLBACK_NO_PERMISSION);
         }
+    }
+
+    private static Location getMostRecentLocation(Location locA, Location locB, Location locC) {
+        Location best = null;
+        if (locA != null) best = locA;
+        if (locB != null && (best == null || locB.getTime() > best.getTime())) best = locB;
+        if (locC != null && (best == null || locC.getTime() > best.getTime())) best = locC;
+        return best;
     }
 
     /**
